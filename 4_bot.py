@@ -33,8 +33,7 @@ def check_phone(phone: str) -> bool:
 
 @input_error_decorator 
 def change_contact(contacts:dict[str, str], *param) -> str:
-    name = param[0]
-    phone = param[1]
+    name, phone = param
     if name in contacts:
         if check_phone(phone):
             contacts[name] = phone
@@ -53,11 +52,11 @@ def add_contact(contacts:dict[str, str], *param) -> str:
 @input_error_decorator
 def del_contact(contacts:dict[str, str], *param) -> str:
     name = param[0]
-    if name in contacts:
-        del contacts[name]
-        return("Контакт видалено.")
-    else:
-        return("Контакт не знайдено.") 
+    # if name in contacts:
+    del contacts[name]
+    return("Контакт видалено.")
+    # else:
+        # return("Контакт не знайдено.") 
 
 @input_error_decorator
 def show_phone(contacts:dict[str, str], *param) -> str:
@@ -80,7 +79,7 @@ def main():
             case "change":
                 print(change_contact(contacts, *param))
             case "phone":
-                print(show_phone(contacts), *param)
+                print(show_phone(contacts, *param))
             case 'all':
                 print(show_contacts(contacts))
             case 'del':
